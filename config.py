@@ -2,4 +2,4 @@
 import os
 
 token = ''  # Insert token here:
-directory = os.getcwd()
+working_directory = os.getcwd()
