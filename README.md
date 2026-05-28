@@ -17,6 +17,6 @@ It shall be noted that self-bots are against Discord's TOS. As such, it is recom
 In order to run this package, [``discord.py-self[voice]``](https://discordpy-self.readthedocs.io/en/latest/intro.html) must be installed in the same folder as the main, and config py files.
 
 ## Running the Program
-Ensure that the account token for which you are logging from is pasted into the ``config.py`` file.
+Ensure that the account token for which you are logging from is pasted into the ``config.py`` file. (You may need to run the ``config.py`` file to update the token)
 
 Since this is a CLI tool, you simply execute ``python main.py`` in your system terminal in order to execute the program.
