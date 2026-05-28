@@ -14,4 +14,4 @@ I plan to implement voice call recording.
 It shall be noted that self-bots are against Discord's TOS. As such, it is recommended that you do not use your personal account to run the self-bot, but rather, an alternative account.
 
 ## Dependencies
-In order to run this package, [``discord.py-self[voice]``](https://discordpy-self.readthedocs.io/en/latest/intro.html) must be installed.
+In order to run this package, [``discord.py-self[voice]``](https://discordpy-self.readthedocs.io/en/latest/intro.html) must be installed in the same folder as the main, and config py files.
