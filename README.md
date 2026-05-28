@@ -20,3 +20,5 @@ In order to run this package, [``discord.py-self[voice]``](https://discordpy-sel
 Ensure that the account token for which you are logging from is pasted into the ``config.py`` file. (You may need to run the ``config.py`` file to update the token)
 
 Since this is a CLI tool, you simply execute ``python main.py`` in your system terminal in order to execute the program.
+
+Logged message data is stored in the form of a .txt file under the appropriately named ``message_logs`` directory.
