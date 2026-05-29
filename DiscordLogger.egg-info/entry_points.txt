@@ -1,0 +1,2 @@
+[console_scripts]
+discord-logger = DiscordLogger.main:main [config]
