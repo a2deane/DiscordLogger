@@ -6,3 +6,4 @@ DiscordLogger.egg-info
 DiscordLogger/__pycache__
 dist
 .gitignore
+DiscordScrapper.egg-info
