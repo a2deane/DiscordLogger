@@ -1,0 +1,10 @@
+README.md
+setup.py
+DiscordLogger/__init__.py
+DiscordLogger/main.py
+DiscordScraper.egg-info/PKG-INFO
+DiscordScraper.egg-info/SOURCES.txt
+DiscordScraper.egg-info/dependency_links.txt
+DiscordScraper.egg-info/entry_points.txt
+DiscordScraper.egg-info/requires.txt
+DiscordScraper.egg-info/top_level.txt
