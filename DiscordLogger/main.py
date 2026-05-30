@@ -4,9 +4,7 @@ from discord import *
 import os
 import pathlib
 import time
-
-token = '' # Bot token, must be set by user
-working_directory = os.getcwd()
+from config import token, working_directory
 
 class MyClient(Client):
     async def on_ready(self):
