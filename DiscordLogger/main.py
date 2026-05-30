@@ -4,9 +4,9 @@ from discord import *
 import os
 import pathlib
 import time
-from config import token
-from config import working_directory
 
+token = '' # Bot token, must be set by user
+working_directory = os.getcwd()
 
 class MyClient(Client):
     async def on_ready(self):
@@ -14,7 +14,7 @@ class MyClient(Client):
 
     async def on_message(self, message):
 
-        pathlib.Path(f'{working_directory}/message_logs/{message.guild}').mkdir(exist_ok=True)  # Creates working_directory for server message was sent in
+        pathlib.Path(f'{working_directory}/DiscordLoggermessage_logs/{message.guild}').mkdir(exist_ok=True)  # Creates working_directory for server message was sent in
         os.chdir(f'{working_directory}/message_logs/{message.guild}')
 
         if message.attachments != []:

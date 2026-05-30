@@ -1,7 +1,6 @@
 README.md
 setup.py
 DiscordLogger/__init__.py
-DiscordLogger/config.py
 DiscordLogger/main.py
 DiscordLogger.egg-info/PKG-INFO
 DiscordLogger.egg-info/SOURCES.txt
