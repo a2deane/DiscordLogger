@@ -1,3 +1,0 @@
-[console_scripts]
-discord-logger = DiscordLogger.main:run_bot
-update-token = DiscordLogger.main:update_token

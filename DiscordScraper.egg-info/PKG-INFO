@@ -1,5 +1,9 @@
 Metadata-Version: 2.4
 Name: DiscordScraper
-Version: 1.0.1
+Version: 1.0.22
+Author: Aiden Deane
+Author-email: Aiden.Deane@me.com
 Requires-Dist: discord.py-self[voice]>=2.1.0
+Dynamic: author
+Dynamic: author-email
 Dynamic: requires-dist

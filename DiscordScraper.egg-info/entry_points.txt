@@ -1,3 +1,4 @@
 [console_scripts]
 discord-logger = DiscordLogger.main:run_bot
+dl-dir = DiscordLogger.main:get_dir
 update-token = DiscordLogger.main:update_token

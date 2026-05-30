@@ -6,10 +6,29 @@ import os
 import pathlib
 import time
 
-working_directory = f'{os.getcwd()}/DiscordLogger'
+working_directory = f"{pathlib.Path('main.py').resolve().parent}/DiscordLogger"
+
+def get_dir():
+    return print(working_directory)
     
+def update_token():
+    new_token = input('Enter static token:\n> ')
+    file = open('config.toml','w')
+    file.write(
+        f'token = "{new_token}"\ntoken_inserted = "True"'
+    )
+    return print('Token updated successfully.')
+
+def update_directory():
+    new_directory = input('Enter the directory you wish to serve files to')
+    try:
+        pathlib.Path(f'{new_directory}/DiscordScraper').mkdir()
+        print('Created folder "DiscordScraper" at desired path')
+    except OSError:
+        print('Invalid path')
+
 def run_bot():
-    if not tomllib.load(open('DiscordLogger/config.toml','rb'))['token_inserted']:
+    if not tomllib.load(open(f'{working_directory}/config.toml','rb'))['token_inserted']:
         print('Token not inserted. Insert before starting bot.')
         return
     else:
@@ -26,13 +45,13 @@ def run_bot():
                     if isinstance(message.attachments[0],Attachment) and message.attachments: # Check
                         for sent_attachment in message.attachments:
                             with open(f'{message.channel}.txt','a') as file:
-                                file.write(f'{time.strftime('%d/%m/%Y - %H:%M',time.localtime())} {message.author} (User ID = {message.author.id}):\n')
+                                file.write(f"{time.strftime('%d/%m/%Y - %H:%M',time.localtime())} {message.author} (User ID = {message.author.id}):\n")
                                 file.write(f'\tSent attachment: {sent_attachment.url}\n')
                                 file.write(f'\tMessage ID {message.id}\n')
 
                 # Log text messages
-                with open(f'{message.channel}.txt','a') as file:
-                    file.write(f'{time.strftime('%d/%m/%Y - %H:%M',time.localtime())} {message.author} (User ID = {message.author.id}):\n')
+                with open(f"{message.channel}.txt','a'") as file:
+                    file.write(f"{time.strftime('%d/%m/%Y - %H:%M',time.localtime())} {message.author} (User ID = {message.author.id}):\n")
                     file.write(f'\t{message.content}\n')
 
             # Reaction Log (Only logs reactions to messages sent during runtime)
@@ -42,7 +61,7 @@ def run_bot():
                 os.chdir(f'{working_directory}/message_logs/{reaction.message.guild}')
 
                 with open(f'{reaction.message.channel}.txt','a') as file:
-                    file.write(f'{time.strftime('%d/%m/%Y - %H:%M',time.localtime())} {user} (User ID = {user.id}):\n')
+                    file.write(f"{time.strftime('%d/%m/%Y - %H:%M',time.localtime())} {user} (User ID = {user.id}):\n")
                     if reaction.message.content != '':
                         file.write(f'\tReacted {reaction} to: {reaction.message.content}\n')
                     else:
@@ -55,8 +74,8 @@ def run_bot():
                 pathlib.Path(f'{working_directory}/message_logs/{reaction.message.guild}').mkdir(exist_ok=True)  # Creates working_directory for server message was sent in
                 os.chdir(f'{working_directory}/message_logs/{reaction.message.guild}')
 
-                with open(f'{reaction.message.channel}.txt','a') as file:
-                    file.write(f'{time.strftime('%d/%m/%Y - %H:%M',time.localtime())} {user} (User ID = {user.id}):\n')
+                with open(f"{reaction.message.channel}.txt','a'") as file:
+                    file.write(f"{time.strftime('%d/%m/%Y - %H:%M',time.localtime())} {user} (User ID = {user.id}):\n")
                     if reaction.message.content != '':
                         file.write(f'\tRemoved reaction {reaction} from {reaction.message.content}\n')
                     else:
@@ -71,17 +90,9 @@ def run_bot():
                 os.chdir(f'{working_directory}/message_logs/{before.message.guild}')
 
                 with open(f'{before.channel}.txt','a') as file:
-                    file.write(f'{time.strftime('%d/%m/%Y - %H:%M',time.localtime())} {before.author} (User ID = {before.author.id}):\n')
+                    file.write(f"{time.strftime('%d/%m/%Y - %H:%M',time.localtime())} {before.author} (User ID = {before.author.id}):\n")
                     file.write(f'\tEdited {before.content} to {after.content}\n')
         
         client = MyClient(chunk_guilds_at_startup=False)
         client.run(tomllib.load(open('DiscordLogger/config.toml','rb'))['token'])
-
-def update_token():
-    new_token = input('Enter static token:\n> ')
-    file = open('DiscordLogger/config.toml','w')
-    file.write(
-        f'token = "{new_token}"\ntoken_inserted = "True"'
-    )
-    return print('Token updated successfully.')
 
