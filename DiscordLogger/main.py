@@ -6,6 +6,7 @@ import os
 import pathlib
 import time
 
+
 program_dir = pathlib.Path(__file__).resolve().parent
 
 def setup():
