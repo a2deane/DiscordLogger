@@ -5,13 +5,17 @@ import tomllib
 import os
 import pathlib
 import time
-
+from importlib.metadata import version
+import pathlib
+import click
 
 program_dir = pathlib.Path(__file__).resolve().parent
 
+
 def setup():
+    # Startup prompt for new user
     token = input("Enter the static token:\n> ")
-    working_directory = input("Enter the parent directory you wish to log files to:\n> ")
+    working_directory = input("Enter the parent directory you wish to log files to (e.g. /Users/aiden/):\n> ")
     file = open(f'{program_dir}/config.toml','w')
     file.write(f'token = "{token}"\nworking_directory = "{working_directory}"')
     file.close()
@@ -22,7 +26,35 @@ def setup():
     pathlib.Path(f'{working_directory}/DiscordScraper').mkdir(exist_ok=True)
 
 def get_dir():
-    print(pathlib.Path(__file__).resolve().parent)
+    # Returns the directory of the PIP package.
+    return print(pathlib.Path(__file__).resolve().parent)
+
+def update_token():
+    new_token = input("Enter the new static token:\n> ")
+    working_directory = tomllib.load(open(f'{program_dir}/config.toml','rb'))['working_directory']
+    with open(f'{program_dir}/config.toml','w') as file:
+        file.write(f'token = "{new_token}"\nworking_directory = "{working_directory}"')
+
+def update_directory():
+    new_directory = input("Enter the new directory (e.g. /Users/aiden/):\n> ")
+    token = tomllib.load(open(f'{program_dir}/config.toml','rb'))['token']
+    with open(f'{program_dir}/config.toml','w') as file:
+        file.write(f'token = "{token}"\nworking_directory = "{new_directory}"')
+
+def version():
+    print(f"Current version: {version('requests')}")
+
+def help():
+    # Lists commands and functions for the package
+    print(f'--PythonScraper {version('requests')}--')
+    print('\tA CLI tool for logging discord conversational data.')
+    print('Commands')
+    print('\tdiscordscraper OR ds\tStarts the program')
+    print('discordscraper --setup OR ds -s\tRuns the initial startup sequence of the program')
+    print('discordscraper --update-token\tUpdates the token of the Bot.')
+    print('discordscraper --update-directory\tUpdates the logging directory.')
+    print('Found a bug? Contact me!')
+    print('\taiden.deane@me.com')
 
 def run_bot():
     if not pathlib.Path(f'{program_dir}/config.toml').is_file():
@@ -73,7 +105,7 @@ def run_bot():
                 pathlib.Path(f'{working_directory}/message_logs/{reaction.message.guild}').mkdir(exist_ok=True)  # Creates working_directory for server message was sent in
                 os.chdir(f'{working_directory}/message_logs/{reaction.message.guild}')
 
-                with open(f"{reaction.message.channel}.txt','a'") as file:
+                with open(f'{reaction.message.channel}.txt','a') as file:
                     file.write(f"{time.strftime('%d/%m/%Y - %H:%M',time.localtime())} {user} (User ID = {user.id}):\n")
                     if reaction.message.content != '':
                         file.write(f'\tRemoved reaction {reaction} from {reaction.message.content}\n')

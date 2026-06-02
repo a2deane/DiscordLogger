@@ -8,3 +8,6 @@ dist
 .gitignore
 DiscordScrapper.egg-info
 Disc
+DiscordScraper.egg-info
+.gitignore
+build/lib
